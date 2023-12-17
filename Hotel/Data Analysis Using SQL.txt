@@ -1,0 +1,54 @@
+### Data Analysis Using SQL
+
+1. Show all record of table data 2018
+
+SELECT 
+    *
+FROM
+    Data_2018;
+    
+2. Show all record of table data 2019
+
+SELECT 
+   *
+FROM
+    Data_2019;
+    
+3. Show all record of table data 2020
+
+SELECT 
+    *
+FROM
+    Data_2020;
+    
+4. Getting Revenue using Comman Table Expression (CTE)
+
+With Hotels AS (
+Select * from Data_2018
+Union ALL
+Select * from Data_2019
+Union ALL
+Select * from Data_2020)
+SELECT 
+    arrival_date_year, hotel, Round(sum((Stays_in_week_nights + Stays_in_weekend_nights) * adr)) AS Revenue
+FROM
+    hotels
+    group by arrival_date_year,hotel;
+    
+5. Show all record of table Market Segment
+SELECT 
+    *
+FROM
+    market_segment;
+
+6. Join All the table using left join and common table expression (CTE)    
+
+With Hotels AS (
+Select * from Data_2018
+Union ALL
+Select * from Data_2019
+Union ALL
+Select * from Data_2020)
+SELECT * from hotels
+left join market_segment on market_segment.market_segment=hotels.market_segment
+left join meal_cost on meal_cost.meal=hotels.meal;`
